@@ -43,9 +43,10 @@ $ let isOfficial = state.match.tournament_id || false;
     <a style="color: white;" href=`/tournaments/${match.tournament_id}`>${match.tournament.tournament_name} / ${match.tournament.tournament_group_name}</a>
   </div>
 </if>
-<table id="match-results-table">
-  <thead>
-    <tr>
+<div class="match-results-table-container">
+  <table id="match-results-table">
+    <thead>
+      <tr>
       <th class="block-container-header-red" style="width: 100px;">Legs</th>
       <if(input.statistics.length)>
         <for|statistic| of=input.statistics>
@@ -66,11 +67,11 @@ $ let isOfficial = state.match.tournament_id || false;
         </for>
       </else>
       <th class="block-container-header-red" style="width: 100px;">Results</th>
-    </tr>
-  </thead>
-  <tbody>
-    <for|leg, idx| of=match.legs>
-      <tr>
+      </tr>
+    </thead>
+    <tbody>
+      <for|leg, idx| of=match.legs>
+        <tr>
         <td class="block-container-mid">#${idx + 1}</td>
         <if(input.statistics.length)>
           <for|statistic| of=input.statistics>
@@ -110,17 +111,18 @@ $ let isOfficial = state.match.tournament_id || false;
         <else>
           <td class="block-container-mid">N/A</td>
         </else>
-      </tr>
-    </for>
-    <tr>
-      <td/>
-      <for|statistic| of=input.statistics>
-        $ let player = input.players[statistic.player_id];
-        <td>
-          <player-statistics-card elo=true match=match statistic=statistic player=player isMatchResult=true/>
-        </td>
+        </tr>
       </for>
-      <td/>
-    </tr>
-  </tbody>
-</table>
+      <tr>
+        <td/>
+        <for|statistic| of=input.statistics>
+          $ let player = input.players[statistic.player_id];
+          <td>
+            <player-statistics-card elo=true match=match statistic=statistic player=player isMatchResult=true/>
+          </td>
+        </for>
+        <td/>
+      </tr>
+    </tbody>
+  </table>
+</div>
