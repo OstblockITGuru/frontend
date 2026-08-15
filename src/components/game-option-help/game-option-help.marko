@@ -1,0 +1,56 @@
+$ const helpData = require("../../data/game-help.js");
+$ const collection = input.helpType === "game-type" ? helpData.gameTypes : input.helpType === "match-mode" ? helpData.matchModes : {};
+$ const help = collection[input.value];
+$ const titleId = `${input.modalId}-title`;
+<if(help)>
+  <button
+    class="game-option-help-trigger"
+    type="button"
+    data-toggle="modal"
+    data-target=`#${input.modalId}`
+    aria-label=`Explain ${help.title}`
+    title=`Explain ${help.title}`>
+    <i class="fas fa-info-circle" aria-hidden="true"/>
+  </button>
+  <div
+    id=input.modalId
+    class="modal fade game-option-help-modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby=titleId
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id=titleId>${help.title}</h4>
+        </div>
+        <div class="modal-body">
+          <dl>
+            <dt>Goal</dt>
+            <dd>${help.goal}</dd>
+            <dt>Scoring</dt>
+            <dd>${help.scoring}</dd>
+            <dt>Winning</dt>
+            <dd>${help.winning}</dd>
+            <if(help.specialRules.length)>
+              <dt>Special rules</dt>
+              <dd>
+                <ul>
+                  <for|rule| of=help.specialRules>
+                    <li>${rule}</li>
+                  </for>
+                </ul>
+              </dd>
+            </if>
+          </dl>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</if>

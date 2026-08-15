@@ -2,6 +2,9 @@ $ var defaultAttrId = input.defaultAttrId || "id";
 $ var defaultAttrName = input.defaultAttrName || "name";
 <div class="form-group">
   <label>${input.label}</label>
+  <if(input.helpType)>
+    <game-option-help helpType=input.helpType value=state.index modalId=(input.helpModalId || `${input.attribute}-help-modal`)/>
+  </if>
   <select class="form-control" onChange("handleStateChange") disabled=!state.enabled>
     <if(input.addNull)>
       <option value=-1 selected=(state.index === null)>-</option>

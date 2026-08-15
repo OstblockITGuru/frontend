@@ -1,3 +1,7 @@
+.match-results-table-container {
+    width: 100%;
+}
+
 #match-results-table {
     width: 100%;
     table-layout: fixed;
@@ -20,6 +24,18 @@
         .block-container-with-header {
             border: none;
         }
+    }
+}
+
+@media (max-width: 767px) {
+    .match-results-table-container {
+        overflow-x: auto;
+    }
+
+    #match-results-table {
+        width: max-content;
+        min-width: 100%;
+        table-layout: auto;
     }
 }
 
