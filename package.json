@@ -14,10 +14,9 @@
         "@marko/express": "^2.1.0",
         "@marko/babel-utils": "^6.6.3",
         "alertifyjs": "^1.14.0",
-        "axios": "^0.21.2",
+        "axios": "^0.34.0",
         "body-parser": "^1.20.3",
         "bottleneck": "^2.18.0",
-        "browser-refresh": "^1.7.3",
         "browser-refresh-taglib": "^1.2.1",
         "chart.js": "^3.9.1",
         "compression": "^1.7.5",
@@ -30,7 +29,6 @@
         "lasso": "^4.0.4",
         "lasso-less": "^4.0.2",
         "lasso-marko": "^5.0.1",
-        "less-middleware": "^3.1.0",
         "marko": "^5.37.5",
         "mobile-detect": "^1.4.5",
         "moment": "^2.30.1",
@@ -41,9 +39,15 @@
         "socket.io-client": "^4.2.0",
         "underscore": "^1.13.7",
         "uuid": "^11.0.3",
-        "xmldom": "^0.6.0"
+        "@xmldom/xmldom": "^0.9.12"
+    },
+    "overrides": {
+        "axios": "$axios",
+        "@luxass/strip-json-comments": "2.0.1",
+        "send": "0.19.2"
     },
     "devDependencies": {
+        "browser-refresh": "^1.7.3",
         "cross-env": "^7.0.3"
     }
 }

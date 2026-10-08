@@ -2,8 +2,7 @@ const debug = require('debug')('kcapp:bracket_generator');
 
 const _ = require('underscore');
 const fs = require('fs');
-const DOMParser = require('xmldom').DOMParser;
-const XMLSerializer = require('xmldom').XMLSerializer;
+const { DOMParser, XMLSerializer } = require('@xmldom/xmldom');
 
 exports.generate = function(tournament, metadata, matches, players, current, callback) {
     if (tournament.manual_admin) {

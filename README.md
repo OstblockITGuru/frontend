@@ -13,7 +13,7 @@ To get started with development quickly, the following [installer script](https:
 
 ### Manual
 1. Clone repository `git clone https://github.com/kcapp/frontend.git`
-2. Install all `nodejs` dependencies `npm install`
+2. Install the locked `nodejs` dependencies `npm ci`
 3. Start the frontend by running the following command
     * Windows
         ```bat
@@ -31,6 +31,27 @@ To get started with development quickly, the following [installer script](https:
 1. Pull latest changes `git pull`
 2. Install all new `nodejs` dependencies `npm install`
 3. Delete `.cache` directory `rm -rf .cache`
+
+## Reproducible production dependencies
+
+- `package-lock.json` is authoritative. Use `npm ci` for a clean local install;
+  the Docker build uses `npm ci --omit=dev`.
+- The build and runtime stages use the same digest-pinned Node 22 Alpine image.
+  Node 22 is required by the current Marko toolchain and matches the runtime.
+- The lockfile override keeps the Marko JSON-comment parser on 2.0.1, whose
+  declared engine supports Node 22; 2.0.2 requires Node 24. Axios is pinned to
+  the secure 0.34 line and the same version is forced for `kcapp-bot`; this
+  retains Lasso's supported browser entry while avoiding the vulnerable 0.x
+  versions.
+- `browser-refresh` is development-only; the production container does not
+  install it.
+- At this lockfile revision, `npm audit --omit=dev` reports 0 critical, 1 high,
+  and 5 moderate findings. The remaining high `image-size` advisory is in
+  Lasso's image plugin; that plugin only sends PNG/JPEG/GIF/WebP files to the
+  parser, while the advisory concerns JXL/HEIF/ICNS parsers. The UUID advisory
+  in `raptor-cache` concerns v3/v5/v6 buffer output; the installed Lasso code
+  uses only v1/v4. Remaining Lasso findings and upstream remediation are tracked
+  in [homelab issue #451](https://github.com/OstblockITGuru/homelab/issues/451).
 
 ## Configuration
 Frontend depends on the [kcapp-api](https://github.com/kcapp/api) for fetching data from the database.

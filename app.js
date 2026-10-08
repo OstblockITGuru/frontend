@@ -23,7 +23,6 @@ lasso.configure({
 
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var lessMiddleware = require('less-middleware');
 
 var app = express();
 
@@ -87,7 +86,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(lessMiddleware(path.join(__dirname, 'public')));
+// Lasso compiles the application's LESS from src/; public/ only serves static files.
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
