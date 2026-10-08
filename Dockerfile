@@ -17,6 +17,7 @@ RUN npm ci --omit=dev
 COPY . .
 
 # Write version info into version.json
+ARG KCAPP_GIT_COMMIT=unverified
 RUN node bin/write-version.js
 
 # Create actual image
