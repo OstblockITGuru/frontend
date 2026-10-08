@@ -45,13 +45,16 @@ To get started with development quickly, the following [installer script](https:
   versions.
 - `browser-refresh` is development-only; the production container does not
   install it.
-- At this lockfile revision, `npm audit --omit=dev` reports 0 critical, 1 high,
-  and 5 moderate findings. The remaining high `image-size` advisory is in
-  Lasso's image plugin; that plugin only sends PNG/JPEG/GIF/WebP files to the
-  parser, while the advisory concerns JXL/HEIF/ICNS parsers. The UUID advisory
-  in `raptor-cache` concerns v3/v5/v6 buffer output; the installed Lasso code
-  uses only v1/v4. Remaining Lasso findings and upstream remediation are tracked
-  in [homelab issue #451](https://github.com/OstblockITGuru/homelab/issues/451).
+- At this lockfile revision, `npm audit --omit=dev` reports no findings. Two
+  compatibility-scoped overrides address the old Lasso dependency tree:
+  `lasso` gets `image-size` 0.6.2, before the vulnerable JXL/HEIF/ICNS parsers
+  were introduced. This retains the callback-based file API Lasso uses and
+  supports its dimension allowlist (PNG/JPEG/GIF/WebP). The root `uuid` override
+  also makes `raptor-cache` use the already-installed 11.1.1 release; its
+  vulnerable v3/v5/v6 buffer-output paths are not used by Lasso, which calls
+  only v1/v4. These pins are scoped to the current compatibility constraints
+  and should be revisited with upstream Lasso updates. Tracking:
+  [homelab issue #451](https://github.com/OstblockITGuru/homelab/issues/451).
 
 ## Configuration
 Frontend depends on the [kcapp-api](https://github.com/kcapp/api) for fetching data from the database.

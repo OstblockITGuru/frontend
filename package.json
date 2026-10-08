@@ -44,7 +44,11 @@
     "overrides": {
         "axios": "$axios",
         "@luxass/strip-json-comments": "2.0.1",
-        "send": "0.19.2"
+        "send": "0.19.2",
+        "lasso": {
+            "image-size": "0.6.2"
+        },
+        "uuid": "$uuid"
     },
     "devDependencies": {
         "browser-refresh": "^1.7.3",
